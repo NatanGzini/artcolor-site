@@ -1,0 +1,10 @@
+<svg width="360" height="110" viewBox="0 0 360 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sicoob">
+  <g fill="#fff">
+    <circle cx="47" cy="55" r="20"/>
+    <circle cx="72" cy="34" r="14"/>
+    <circle cx="77" cy="74" r="14"/>
+    <circle cx="24" cy="43" r="13"/>
+    <circle cx="24" cy="69" r="13"/>
+    <text x="112" y="72" font-family="Poppins, Arial, sans-serif" font-size="58" font-weight="900">Sicoob</text>
+  </g>
+</svg>

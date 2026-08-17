@@ -1,0 +1,19 @@
+/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  X-Robots-Tag: all
+
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+  X-Robots-Tag: all
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  X-Robots-Tag: all
+
+/google7b36b42fa89b992c.html
+  Content-Type: text/html; charset=utf-8
+  X-Robots-Tag: noindex
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

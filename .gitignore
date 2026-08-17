@@ -1,0 +1,23 @@
+# Local helper files generated during development
+.codex-tools/
+
+# Operating system noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor and environment files
+.vscode/
+.idea/
+*.log
+.env
+.env.*
+!.env.example
+
+# Dependency/build folders, in case the site becomes an app later
+node_modules/
+dist/
+build/
+.next/
+.vercel/
+.wrangler/

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orçamento rápido | Artcolor Comunicação Visual</title>
+    <meta
+      name="description"
+      content="Peça orçamento rápido na Artcolor Comunicação Visual informando tipo de material, medidas, quantidade, instalação e cidade."
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#151515" />
+    <link rel="canonical" href="https://artcolorcv.com.br/orcamento.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Artcolor Comunicação Visual" />
+    <meta property="og:title" content="Orçamento rápido Artcolor" />
+    <meta
+      property="og:description"
+      content="Informe material, medidas, quantidade, instalação e cidade. Resposta em até 30 minutos durante dias úteis e horário de serviço."
+    />
+    <meta property="og:url" content="https://artcolorcv.com.br/orcamento.html" />
+    <meta property="og:image" content="https://artcolorcv.com.br/assets/portfolio/empresa.png" />
+    <link rel="icon" type="image/png" href="assets/marca/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/marca/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="quote-page">
+    <header class="topbar quote-topbar">
+      <a class="brand magnetic-link" href="index.html#inicio" aria-label="Voltar para início da Artcolor Comunicação Visual">
+        <img src="assets/marca/logo.png" alt="Artcolor Comunicação Visual" />
+      </a>
+      <nav class="quote-nav" aria-label="Navegação do orçamento">
+        <a class="ghost-action magnetic-link" href="index.html#produtos">Produtos</a>
+        <a class="secondary-action magnetic-link" href="index.html#contato">Contato</a>
+      </nav>
+    </header>
+
+    <main class="quote-main">
+      <section class="quote-intro" aria-labelledby="quoteTitle">
+        <div class="quote-intro-copy">
+          <p class="eyebrow">Orçamento rápido</p>
+          <h1 id="quoteTitle">Resposta em até 30 minutos.</h1>
+          <p>
+            Durante dias úteis e horário de serviço, a Artcolor analisa seu pedido com mais agilidade quando você
+            envia material, medidas, quantidade, instalação e cidade logo no primeiro contato.
+          </p>
+          <div class="quote-promise" aria-label="Compromisso de atendimento">
+            <strong>30 min</strong>
+            <span>Retorno no horário comercial</span>
+          </div>
+        </div>
+        <figure class="quote-intro-media">
+          <img src="assets/portfolio/empresa.png" alt="Estrutura da Artcolor Comunicação Visual" />
+        </figure>
+      </section>
+
+      <section class="quote-workspace" aria-label="Formulário de orçamento rápido">
+        <form class="quote-form" id="quickQuoteForm" novalidate>
+          <div class="quote-form-head">
+            <span>Dados essenciais</span>
+            <h2>Monte a mensagem certa para o WhatsApp</h2>
+            <p>Os dados são usados apenas para montar sua mensagem. Nada é salvo no site.</p>
+          </div>
+
+          <label class="quote-field">
+            <span>Tipo de material</span>
+            <input
+              id="material"
+              name="material"
+              type="text"
+              maxlength="80"
+              placeholder="Ex: fachada, adesivo, lona, letras 3D"
+              autocomplete="off"
+              required
+            />
+          </label>
+
+          <label class="quote-field">
+            <span>Medidas</span>
+            <input
+              id="medidas"
+              name="medidas"
+              type="text"
+              maxlength="80"
+              placeholder="Ex: 2,50m x 1,20m ou tamanho aproximado"
+              autocomplete="off"
+              required
+            />
+          </label>
+
+          <label class="quote-field">
+            <span>Quantidade</span>
+            <input id="quantidade" name="quantidade" type="number" min="1" max="99999" step="1" placeholder="Ex: 10" required />
+          </label>
+
+          <fieldset class="quote-field quote-radio-group">
+            <legend>Precisa de instalação?</legend>
+            <label>
+              <input type="radio" name="instalacao" value="Sim" required />
+              <span>Sim</span>
+            </label>
+            <label>
+              <input type="radio" name="instalacao" value="Não" />
+              <span>Não</span>
+            </label>
+            <label>
+              <input type="radio" name="instalacao" value="Ainda vou confirmar" />
+              <span>A confirmar</span>
+            </label>
+          </fieldset>
+
+          <label class="quote-field">
+            <span>Cidade</span>
+            <input id="cidade" name="cidade" type="text" maxlength="70" placeholder="Ex: Capanema/PR" autocomplete="address-level2" required />
+          </label>
+
+          <label class="quote-field">
+            <span>Nome ou empresa <small>opcional</small></span>
+            <input id="cliente" name="cliente" type="text" maxlength="80" placeholder="Ex: Mercado Central" autocomplete="organization" />
+          </label>
+
+          <label class="quote-field quote-field-wide">
+            <span>Detalhes extras <small>opcional</small></span>
+            <textarea
+              id="detalhes"
+              name="detalhes"
+              maxlength="240"
+              rows="4"
+              placeholder="Ex: tenho foto do local, quero acabamento com iluminação, preciso para sexta-feira..."
+            ></textarea>
+          </label>
+
+          <div class="quote-form-actions">
+            <button class="primary-action magnetic-link" type="submit">Enviar no WhatsApp</button>
+            <p id="quoteStatus" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <aside class="quote-preview" aria-label="Resumo do pedido">
+          <span>Resumo</span>
+          <h2>O que a Artcolor vai receber</h2>
+          <dl>
+            <div>
+              <dt>Material</dt>
+              <dd id="previewMaterial">Aguardando</dd>
+            </div>
+            <div>
+              <dt>Medidas</dt>
+              <dd id="previewMedidas">Aguardando</dd>
+            </div>
+            <div>
+              <dt>Quantidade</dt>
+              <dd id="previewQuantidade">Aguardando</dd>
+            </div>
+            <div>
+              <dt>Instalação</dt>
+              <dd id="previewInstalacao">Aguardando</dd>
+            </div>
+            <div>
+              <dt>Cidade</dt>
+              <dd id="previewCidade">Aguardando</dd>
+            </div>
+          </dl>
+          <p>Depois do envio, você pode anexar fotos e referências direto na conversa do WhatsApp.</p>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 Artcolor LTDA</span>
+      <nav aria-label="Links finais">
+        <a href="index.html#inicio">Início</a>
+        <a href="https://wa.me/554699358269" target="_blank" rel="noreferrer">WhatsApp</a>
+        <a href="https://www.instagram.com/artcolorcapanema/" target="_blank" rel="noreferrer">Instagram</a>
+      </nav>
+    </footer>
+
+    <script src="orcamento.js"></script>
+  </body>
+</html>
