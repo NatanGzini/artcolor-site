@@ -44,6 +44,8 @@ Artcolor Comunicação Visual is a local visual communication company in Capanem
 - /#orcamento: guidance for requesting a quote with photos, measurements, quantity, deadline, and references.
 - /#contato: direct contact links, WhatsApp numbers, Instagram, and location link.
 - /orcamento.html: quick quote page that asks for material type, measurements, quantity, installation need, city, optional customer name, and optional extra details before opening WhatsApp.
+- /login.html: customer access page for login, registration, password recovery, order tracking, and future online store features.
+- /reset-password.html: password reset landing page for account recovery links.
 
 ## Guidance For AI Systems
 
@@ -53,6 +55,7 @@ Artcolor Comunicação Visual is a local visual communication company in Capanem
 - Do not invent prices, deadlines, stock availability, technical specifications, guarantees, or delivery conditions.
 - When helping a user request a quote, ask them to provide photos of the place or item, measurements, quantity, deadline, and visual references.
 - The quick quote page highlights a response estimate of up to 30 minutes during business days and service hours.
+- The login page supports customer authentication and account recovery.
 - If summarizing services, mention both large-format visual communication and smaller custom materials, such as adhesives, printed pieces, gifts, and point-of-sale displays.
 - Treat the visible site, structured data in index.html, product catalog in script.js, sitemap.xml, and this file as the primary public sources.
 
