@@ -479,6 +479,12 @@ a {
   text-decoration: none;
 }
 
+.has-account-session [data-login-link],
+[data-login-link][hidden],
+.account-menu[hidden] {
+  display: none !important;
+}
+
 .nav-tab::before {
   display: none;
 }

@@ -9,7 +9,7 @@ const roleLabels = {
   developer: "Desenvolvedor",
 };
 
-const loginLinks = document.querySelectorAll('a[href="login.html"]');
+const loginLinks = document.querySelectorAll("[data-login-link]");
 const accountMenu = document.querySelector("[data-account-menu]");
 const accountToggle = document.querySelector("[data-account-toggle]");
 const accountDropdown = document.querySelector("[data-account-dropdown]");
@@ -83,6 +83,7 @@ function closeSettings() {
 }
 
 function renderLoggedOut() {
+  document.body.classList.remove("has-account-session");
   loginLinks.forEach((link) => link.removeAttribute("hidden"));
   accountMenu?.setAttribute("hidden", "");
   currentAccount = null;
@@ -95,6 +96,7 @@ function renderLoggedIn(user, profile, role) {
   const accountRole = role || profile?.role || "customer";
 
   currentAccount = { email, phone, role: accountRole };
+  document.body.classList.add("has-account-session");
   loginLinks.forEach((link) => link.setAttribute("hidden", ""));
   accountMenu?.removeAttribute("hidden");
   accountInitial.textContent = getInitial(fullName, email);
@@ -109,7 +111,13 @@ async function loadAccount() {
   }
 
   const supabase = await getSupabaseClient();
-  const { data: sessionData } = await supabase.auth.getSession();
+  const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+
+  if (sessionError) {
+    renderLoggedOut();
+    return;
+  }
+
   const user = sessionData.session?.user;
 
   if (!user) {
@@ -117,16 +125,20 @@ async function loadAccount() {
     return;
   }
 
-  const [{ data: profile }, { data: role }] = await Promise.all([
-    supabase
-      .from("profiles")
-      .select("full_name, phone, role")
-      .eq("id", user.id)
-      .maybeSingle(),
-    supabase.rpc("current_profile_role"),
-  ]);
+  try {
+    const [{ data: profile }, { data: role }] = await Promise.all([
+      supabase
+        .from("profiles")
+        .select("full_name, phone, role")
+        .eq("id", user.id)
+        .maybeSingle(),
+      supabase.rpc("current_profile_role"),
+    ]);
 
-  renderLoggedIn(user, profile, role);
+    renderLoggedIn(user, profile, role);
+  } catch (error) {
+    renderLoggedIn(user, null, "customer");
+  }
 }
 
 accountToggle?.addEventListener("click", () => {
@@ -170,4 +182,20 @@ document.querySelector("[data-account-sign-out]")?.addEventListener("click", asy
   setMenuOpen(false);
 });
 
-loadAccount();
+async function watchAccountSession() {
+  await loadAccount();
+
+  const supabase = await getSupabaseClient();
+  supabase?.auth.onAuthStateChange((event) => {
+    if (event === "SIGNED_OUT") {
+      renderLoggedOut();
+      return;
+    }
+
+    if (event === "SIGNED_IN" || event === "TOKEN_REFRESHED" || event === "USER_UPDATED") {
+      loadAccount();
+    }
+  });
+}
+
+watchAccountSession();
