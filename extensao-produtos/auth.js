@@ -150,24 +150,6 @@ function getAreaByRole(role) {
   return internalRoles.has(role) ? "painel-interno.html" : "area-cliente.html";
 }
 
-async function redirectToAccountArea(role, status) {
-  const targetPath = getAreaByRole(role);
-
-  try {
-    const response = await fetch(targetPath, { method: "HEAD", cache: "no-store" });
-
-    if (!response.ok) {
-      setStatus(status, "Login confirmado, mas sua área ainda não está publicada. Aguarde o deploy e tente novamente.", "warning");
-      return;
-    }
-  } catch (error) {
-    setStatus(status, "Login confirmado, mas não foi possível abrir sua área agora.", "warning");
-    return;
-  }
-
-  window.location.assign(targetPath);
-}
-
 async function registerWithProvider({ name, email, phone, password }) {
   const supabase = await getSupabaseClient();
   const { data, error } = await supabase.auth.signUp({
@@ -230,7 +212,7 @@ async function handleLogin(event) {
     const { user } = await signInWithProvider({ email, password });
     const profile = user ? await getSignedInProfile(user.id) : null;
     setStatus(status, "Login confirmado. Redirecionando para sua área.", "success");
-    await redirectToAccountArea(profile?.role, status);
+    window.location.assign(getAreaByRole(profile?.role));
   } catch (error) {
     console.error("Artcolor auth login failed", {
       code: error?.code,
