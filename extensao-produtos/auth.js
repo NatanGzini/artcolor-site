@@ -150,6 +150,36 @@ function getAreaByRole(role) {
   return internalRoles.has(role) ? "painel-interno.html" : "area-cliente.html";
 }
 
+async function redirectAuthenticatedUser(user, fallbackRole = "customer") {
+  let profile = null;
+
+  try {
+    profile = user ? await getSignedInProfile(user.id) : null;
+  } catch (error) {
+    console.error("Artcolor profile lookup failed", {
+      code: error?.code,
+      status: error?.status,
+      message: error?.message,
+    });
+  }
+
+  window.location.assign(getAreaByRole(profile?.role || fallbackRole));
+}
+
+function getLoginErrorMessage(error) {
+  const message = String(error?.message || "").toLowerCase();
+
+  if (message.includes("email not confirmed")) {
+    return "Confirme seu e-mail antes de entrar. Se não achar a mensagem, verifique spam ou crie a conta novamente para reenviar.";
+  }
+
+  if (message.includes("invalid login credentials")) {
+    return "E-mail ou senha incorretos. Confira os dados e tente novamente.";
+  }
+
+  return "Não foi possível entrar agora. Tente novamente em instantes.";
+}
+
 async function registerWithProvider({ name, email, phone, password }) {
   const supabase = await getSupabaseClient();
   const { data, error } = await supabase.auth.signUp({
@@ -210,16 +240,15 @@ async function handleLogin(event) {
 
   try {
     const { user } = await signInWithProvider({ email, password });
-    const profile = user ? await getSignedInProfile(user.id) : null;
     setStatus(status, "Login confirmado. Redirecionando para sua área.", "success");
-    window.location.assign(getAreaByRole(profile?.role));
+    await redirectAuthenticatedUser(user);
   } catch (error) {
     console.error("Artcolor auth login failed", {
       code: error?.code,
       status: error?.status,
       message: error?.message,
     });
-    setStatus(status, "Não foi possível entrar. Confira os dados e tente novamente.", "error");
+    setStatus(status, getLoginErrorMessage(error), "error");
   }
 }
 
@@ -248,10 +277,25 @@ async function handleRegister(event) {
   }
 
   try {
-    await registerWithProvider({ name, email, phone, password });
-    setStatus(status, "Conta criada. Verifique seu e-mail para confirmar o acesso.", "success");
+    const { session } = await registerWithProvider({ name, email, phone, password });
+
+    if (session?.user) {
+      setStatus(status, "Conta criada. Redirecionando para sua área.", "success");
+      await redirectAuthenticatedUser(session.user);
+      return;
+    }
+
+    setStatus(status, "Conta criada. Confirme seu e-mail antes de fazer login.", "success");
     registerForm.reset();
+    document.querySelector("#loginEmail").value = email;
+    activateAuthTab("login");
+    setStatus(document.querySelector("#loginStatus"), "Conta criada. Confirme seu e-mail antes de entrar.", "success");
   } catch (error) {
+    console.error("Artcolor auth register failed", {
+      code: error?.code,
+      status: error?.status,
+      message: error?.message,
+    });
     setStatus(status, "Não foi possível criar a conta agora. Tente novamente em instantes.", "error");
   }
 }
