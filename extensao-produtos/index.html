@@ -198,6 +198,22 @@
         <button class="nav-tab" type="button" data-tab="orcamento">Orçamento</button>
         <button class="nav-tab" type="button" data-tab="contato">Contato</button>
         <a class="nav-tab nav-link-tab" href="login.html">Entrar</a>
+        <div class="account-menu" data-account-menu hidden>
+          <button class="account-trigger" type="button" data-account-toggle aria-expanded="false" aria-label="Abrir menu da conta">
+            <span data-account-initial>U</span>
+          </button>
+          <div class="account-dropdown" data-account-dropdown>
+            <div class="account-dropdown-head">
+              <strong data-account-name>Conta Artcolor</strong>
+              <span data-account-email></span>
+            </div>
+            <a href="area-cliente.html" data-account-area-link>Minha área</a>
+            <button type="button" data-account-settings>Configurações</button>
+            <button type="button" data-account-password>Alterar senha</button>
+            <button type="button" data-account-sign-out>Sair da conta</button>
+            <p class="account-menu-status" data-account-menu-status role="status" aria-live="polite"></p>
+          </div>
+        </div>
       </nav>
     </header>
 
@@ -648,6 +664,28 @@
       </div>
     </div>
 
+    <div class="account-settings-modal" id="accountSettingsModal" aria-hidden="true">
+      <div class="account-settings-panel" role="dialog" aria-modal="true" aria-labelledby="accountSettingsTitle">
+        <button class="privacy-close" type="button" data-account-settings-close aria-label="Fechar configurações">×</button>
+        <p class="eyebrow">Conta</p>
+        <h2 id="accountSettingsTitle">Configurações</h2>
+        <dl>
+          <div>
+            <dt>E-mail</dt>
+            <dd data-settings-email>Não informado</dd>
+          </div>
+          <div>
+            <dt>Telefone</dt>
+            <dd data-settings-phone>Não informado</dd>
+          </div>
+          <div>
+            <dt>Cargo</dt>
+            <dd data-settings-role>Cliente</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
     <div class="cookie-banner" id="cookieBanner" role="region" aria-label="Aviso de cookies">
       <div>
         <strong>Privacidade e cookies</strong>
@@ -665,5 +703,6 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
+    <script type="module" src="site-account.js"></script>
   </body>
 </html>

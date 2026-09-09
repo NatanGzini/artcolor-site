@@ -496,6 +496,122 @@ a {
   display: none;
 }
 
+.account-menu {
+  position: relative;
+}
+
+.account-trigger {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 202, 40, 0.5);
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--black);
+  cursor: pointer;
+  font-size: 0.98rem;
+  font-weight: 900;
+  box-shadow: 0 10px 26px rgba(239, 173, 0, 0.2);
+  transition:
+    transform 320ms var(--ease),
+    box-shadow 320ms var(--ease);
+}
+
+.account-trigger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(239, 173, 0, 0.28);
+}
+
+.account-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 40;
+  display: grid;
+  gap: 6px;
+  width: min(300px, calc(100vw - 28px));
+  padding: 12px;
+  border: 1px solid rgba(255, 202, 40, 0.32);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 202, 40, 0.11), transparent 36%),
+    #1b1a16;
+  box-shadow: 0 22px 58px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition:
+    opacity 220ms var(--ease),
+    transform 220ms var(--ease);
+}
+
+.account-menu.is-open .account-dropdown {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.account-dropdown-head {
+  display: grid;
+  gap: 4px;
+  padding: 6px 6px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.account-dropdown-head strong {
+  color: var(--white);
+  font-size: 0.94rem;
+}
+
+.account-dropdown-head span {
+  overflow-wrap: anywhere;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.account-dropdown a,
+.account-dropdown button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 38px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.82);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-align: left;
+  text-decoration: none;
+}
+
+.account-dropdown a:hover,
+.account-dropdown button:hover {
+  background: rgba(255, 202, 40, 0.14);
+  color: var(--yellow);
+}
+
+.account-menu-status {
+  min-height: 20px;
+  margin: 4px 6px 0;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.account-menu-status[data-status="error"] {
+  color: #ff8f8f;
+}
+
+.account-menu-status[data-status="success"] {
+  color: #9cf6c1;
+}
+
 .tab-panel {
   display: none;
 }
@@ -2483,7 +2599,8 @@ textarea:focus-visible {
   color: var(--black);
 }
 
-.privacy-modal {
+.privacy-modal,
+.account-settings-modal {
   position: fixed;
   inset: 0;
   z-index: 130;
@@ -2494,11 +2611,13 @@ textarea:focus-visible {
   backdrop-filter: blur(12px);
 }
 
-.privacy-modal.is-visible {
+.privacy-modal.is-visible,
+.account-settings-modal.is-visible {
   display: grid;
 }
 
-.privacy-modal-panel {
+.privacy-modal-panel,
+.account-settings-panel {
   position: relative;
   width: min(760px, 100%);
   max-height: min(760px, calc(100vh - 36px));
@@ -2514,11 +2633,13 @@ textarea:focus-visible {
 }
 
 .privacy-modal-panel h2,
-.privacy-modal-panel h3 {
+.privacy-modal-panel h3,
+.account-settings-panel h2 {
   color: #fff;
 }
 
-.privacy-modal-panel h2 {
+.privacy-modal-panel h2,
+.account-settings-panel h2 {
   margin-bottom: 14px;
 }
 
@@ -2530,6 +2651,39 @@ textarea:focus-visible {
 .privacy-modal-panel p {
   color: rgba(255, 255, 255, 0.76);
   line-height: 1.62;
+}
+
+.account-settings-panel {
+  width: min(520px, 100%);
+}
+
+.account-settings-panel dl {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0 0;
+}
+
+.account-settings-panel dl div {
+  display: grid;
+  gap: 5px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.account-settings-panel dt {
+  color: var(--yellow);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.account-settings-panel dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: rgba(255, 255, 255, 0.84);
+  font-weight: 800;
 }
 
 .privacy-close {
@@ -2846,6 +3000,18 @@ textarea:focus-visible {
     min-height: 38px;
     padding: 0 16px;
     white-space: nowrap;
+  }
+
+  .account-menu {
+    flex: 0 0 auto;
+  }
+
+  .account-dropdown {
+    position: fixed;
+    top: auto;
+    right: 12px;
+    left: 12px;
+    width: auto;
   }
 
   .catalog-toolbar,

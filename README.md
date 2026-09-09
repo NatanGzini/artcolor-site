@@ -7,6 +7,7 @@ Site institucional da Artcolor Comunicação Visual, com catálogo de produtos, 
 - `extensao-produtos/index.html`: página principal do site.
 - `extensao-produtos/styles.css`: estilos visuais e responsivos.
 - `extensao-produtos/script.js`: navegação, catálogo, busca e controles da página principal.
+- `extensao-produtos/site-account.js`: mantém a sessão visível no site principal, com menu de conta, saída e alteração de senha.
 - `extensao-produtos/orcamento.html`: página separada de orçamento rápido.
 - `extensao-produtos/orcamento.js`: validação local e montagem segura da mensagem para WhatsApp.
 - `extensao-produtos/login.html`: tela de login, cadastro e recuperação preparada para Supabase Auth.
