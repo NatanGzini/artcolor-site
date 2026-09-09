@@ -90,25 +90,29 @@ async function bootAccountArea() {
   }
 
   const user = sessionData.session.user;
-  const { data: profile, error: profileError } = await supabase
-    .from("profiles")
-    .select("full_name, phone, company_name, city, role")
-    .eq("id", user.id)
-    .maybeSingle();
+  const [{ data: profile, error: profileError }, { data: role, error: roleError }] = await Promise.all([
+    supabase
+      .from("profiles")
+      .select("full_name, phone, company_name, city, role")
+      .eq("id", user.id)
+      .maybeSingle(),
+    supabase.rpc("current_profile_role"),
+  ]);
 
-  if (profileError) {
+  if (profileError || roleError) {
     setStatus("Não foi possível carregar sua área agora.", "error");
     return;
   }
 
-  const role = profile?.role || "customer";
+  const effectiveProfile = { ...profile, role: role || profile?.role || "customer" };
+  const accountRole = effectiveProfile.role;
 
-  if (shouldRedirect(role)) {
-    window.location.replace(internalRoles.has(role) ? "painel-interno.html" : "area-cliente.html");
+  if (shouldRedirect(accountRole)) {
+    window.location.replace(internalRoles.has(accountRole) ? "painel-interno.html" : "area-cliente.html");
     return;
   }
 
-  renderProfile(user, profile);
+  renderProfile(user, effectiveProfile);
   setStatus("Acesso confirmado.", "success");
 }
 

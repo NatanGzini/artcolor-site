@@ -22,6 +22,8 @@ as $$
   select role from public.profiles where id = auth.uid()
 $$;
 
+grant execute on function public.current_profile_role() to authenticated;
+
 create or replace function public.is_internal_user()
 returns boolean
 language sql
@@ -32,6 +34,8 @@ as $$
   select coalesce(public.current_profile_role() in ('staff', 'admin', 'developer'), false)
 $$;
 
+grant execute on function public.is_internal_user() to authenticated;
+
 create or replace function public.is_admin_user()
 returns boolean
 language sql
@@ -41,6 +45,8 @@ set search_path = public
 as $$
   select coalesce(public.current_profile_role() in ('admin', 'developer'), false)
 $$;
+
+grant execute on function public.is_admin_user() to authenticated;
 
 drop policy if exists "Users can read own profile" on public.profiles;
 create policy "Users can read own profile"

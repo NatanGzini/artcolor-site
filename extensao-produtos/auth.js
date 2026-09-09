@@ -133,17 +133,13 @@ async function signInWithProvider({ email, password }) {
 
 async function getSignedInProfile(userId) {
   const supabase = await getSupabaseClient();
-  const { data, error } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", userId)
-    .maybeSingle();
+  const { data, error } = await supabase.rpc("current_profile_role");
 
   if (error) {
     throw error;
   }
 
-  return data;
+  return { role: data || "customer" };
 }
 
 function getAreaByRole(role) {
@@ -151,18 +147,7 @@ function getAreaByRole(role) {
 }
 
 async function redirectAuthenticatedUser(user, fallbackRole = "customer") {
-  let profile = null;
-
-  try {
-    profile = user ? await getSignedInProfile(user.id) : null;
-  } catch (error) {
-    console.error("Artcolor profile lookup failed", {
-      code: error?.code,
-      status: error?.status,
-      message: error?.message,
-    });
-  }
-
+  const profile = user ? await getSignedInProfile(user.id) : null;
   window.location.assign(getAreaByRole(profile?.role || fallbackRole));
 }
 
