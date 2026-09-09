@@ -504,13 +504,19 @@ a {
 
 .account-menu {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
 }
 
 .account-trigger {
   display: inline-grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border: 1px solid rgba(255, 202, 40, 0.5);
   border-radius: 50%;
   background: var(--yellow);
@@ -518,6 +524,7 @@ a {
   cursor: pointer;
   font-size: 0.98rem;
   font-weight: 900;
+  line-height: 1;
   box-shadow: 0 10px 26px rgba(239, 173, 0, 0.2);
   transition:
     transform 320ms var(--ease),
