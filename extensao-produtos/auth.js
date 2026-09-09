@@ -12,6 +12,7 @@ const registerForm = document.querySelector("#registerPanel");
 const recoverForm = document.querySelector("#recoverPanel");
 const rememberEmail = document.querySelector("#rememberEmail");
 const rememberedEmailKey = "artcolor_auth_email";
+const internalRoles = new Set(["staff", "admin", "developer"]);
 let supabaseClientPromise = null;
 
 function cleanText(value, maxLength) {
@@ -130,6 +131,25 @@ async function signInWithProvider({ email, password }) {
   return data;
 }
 
+async function getSignedInProfile(userId) {
+  const supabase = await getSupabaseClient();
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", userId)
+    .maybeSingle();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+function getAreaByRole(role) {
+  return internalRoles.has(role) ? "painel-interno.html" : "area-cliente.html";
+}
+
 async function registerWithProvider({ name, email, phone, password }) {
   const supabase = await getSupabaseClient();
   const { data, error } = await supabase.auth.signUp({
@@ -189,8 +209,10 @@ async function handleLogin(event) {
   }
 
   try {
-    await signInWithProvider({ email, password });
+    const { user } = await signInWithProvider({ email, password });
+    const profile = user ? await getSignedInProfile(user.id) : null;
     setStatus(status, "Login confirmado. Redirecionando para sua área.", "success");
+    window.location.assign(getAreaByRole(profile?.role));
   } catch (error) {
     setStatus(status, "Não foi possível entrar. Confira os dados e tente novamente.", "error");
   }

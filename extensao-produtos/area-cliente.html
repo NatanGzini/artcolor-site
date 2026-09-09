@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Área do cliente | Artcolor Comunicação Visual</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#151515" />
+    <link rel="icon" type="image/png" href="assets/marca/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="account-page" data-required-role="customer">
+    <header class="topbar quote-topbar">
+      <a class="brand magnetic-link" href="index.html#inicio" aria-label="Voltar para início da Artcolor Comunicação Visual">
+        <img src="assets/marca/logo.png" alt="Artcolor Comunicação Visual" />
+      </a>
+      <nav class="quote-nav" aria-label="Navegação da área do cliente">
+        <a class="ghost-action magnetic-link" href="index.html#produtos">Produtos</a>
+        <a class="secondary-action magnetic-link" href="orcamento.html">Orçamento</a>
+        <button class="ghost-action magnetic-link" type="button" data-sign-out>Sair</button>
+      </nav>
+    </header>
+
+    <main class="account-shell">
+      <section class="account-hero" aria-labelledby="accountTitle">
+        <p class="eyebrow">Área do cliente</p>
+        <h1 id="accountTitle">Bem-vindo, <span data-profile-name>cliente Artcolor</span></h1>
+        <p>Acompanhe seus orçamentos, pedidos e compras futuras em um ambiente preparado para crescer junto com a loja online.</p>
+        <div class="account-profile-strip">
+          <span data-profile-email></span>
+          <strong data-profile-role>Cliente</strong>
+        </div>
+      </section>
+
+      <section class="account-grid" aria-label="Resumo da conta">
+        <article class="account-card">
+          <span>Orçamentos</span>
+          <strong>0</strong>
+          <p>Quando o módulo de pedidos entrar, seus orçamentos aparecerão aqui.</p>
+        </article>
+        <article class="account-card">
+          <span>Em produção</span>
+          <strong>0</strong>
+          <p>Pedidos aprovados serão acompanhados por estágio.</p>
+        </article>
+        <article class="account-card">
+          <span>Finalizados</span>
+          <strong>0</strong>
+          <p>Histórico de compras para facilitar novos pedidos.</p>
+        </article>
+      </section>
+
+      <p class="account-status" data-account-status role="status" aria-live="polite"></p>
+    </main>
+
+    <script type="module" src="account-area.js"></script>
+  </body>
+</html>

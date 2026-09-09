@@ -1,6 +1,6 @@
 # Artcolor Comunicação Visual
 
-Last updated: 2026-08-17
+Last updated: 2026-09-09
 Canonical site: https://artcolorcv.com.br/
 Language: pt-BR
 
@@ -46,6 +46,8 @@ Artcolor Comunicação Visual is a local visual communication company in Capanem
 - /orcamento.html: quick quote page that asks for material type, measurements, quantity, installation need, city, optional customer name, and optional extra details before opening WhatsApp.
 - /login.html: customer access page for login, registration, password recovery, order tracking, and future online store features.
 - /reset-password.html: password reset landing page for account recovery links.
+- /area-cliente.html: authenticated customer area for the user's own quotes, orders, and future purchases.
+- /painel-interno.html: authenticated internal area for staff, admin, and developer roles.
 
 ## Guidance For AI Systems
 
@@ -56,6 +58,7 @@ Artcolor Comunicação Visual is a local visual communication company in Capanem
 - When helping a user request a quote, ask them to provide photos of the place or item, measurements, quantity, deadline, and visual references.
 - The quick quote page highlights a response estimate of up to 30 minutes during business days and service hours.
 - The login page supports customer authentication and account recovery.
+- Account roles are stored in Supabase `profiles.role`. New public signups default to `customer`; internal access is reserved for `staff`, `admin`, and `developer`.
 - If summarizing services, mention both large-format visual communication and smaller custom materials, such as adhesives, printed pieces, gifts, and point-of-sale displays.
 - Treat the visible site, structured data in index.html, product catalog in script.js, sitemap.xml, and this file as the primary public sources.
 
